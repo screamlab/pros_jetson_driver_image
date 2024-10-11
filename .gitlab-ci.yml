@@ -38,7 +38,7 @@ build_and_publish:
     # Build and push Docker image
     - echo "Building and pushing Docker image $REGISTRY/$IMAGE_NAME with tag $TAG"
     - |
-      docker buildx build --platform linux/arm64,linux/amd64 \
+      docker buildx build --provenance=false --platform linux/arm64,linux/amd64 \
         -t $REGISTRY/$IMAGE_NAME:$TAG \
         -t $REGISTRY/$IMAGE_NAME:latest \
         --push .
