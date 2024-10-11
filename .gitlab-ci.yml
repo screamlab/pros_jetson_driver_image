@@ -7,6 +7,8 @@ variables:
 
 before_script:
   - echo "Logging in to registry"
+  - echo "The CI registry is $CI_REGISTRY"
+  - echo "The CI registry user is $CI_REGISTRY_USER"
   - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
   - docker info
 
@@ -15,6 +17,10 @@ build_and_publish:
   image: docker:24.0  # Use the Docker image for building
   services:
     - docker:24.0-dind  # Docker-in-Docker service
+  variables:
+    DOCKER_TLS_CERTDIR: ""  # Disable TLS for communication with Docker daemon
+  before_script:
+    - docker info  # Verify Docker client can connect to Docker daemon
 
   script:
     # Check out the repository (this happens automatically in GitLab)
