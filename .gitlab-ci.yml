@@ -19,7 +19,10 @@ build_and_publish:
     - echo "The CI registry is $CI_REGISTRY"
     - echo "The CI registry user is $CI_REGISTRY_USER"
     - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
-    - echo "Number of CPU threads is $(nproc)"
+    - THREADS=$(nproc)
+    # Check if THREADS is a valid integer, otherwise set to 4
+    - if ! [[ "$THREADS" =~ ^[0-9]+$ ]]; then THREADS=4; fi
+    - echo "Number of CPU threads is $THREADS"
     - docker info  # Verify Docker client can connect to Docker daemon
 
   script:
@@ -41,7 +44,7 @@ build_and_publish:
     - echo "Building and pushing Docker image $REGISTRY/$IMAGE_NAME with tag $TAG"
     - |
       docker buildx build --provenance=false --platform linux/arm64,linux/amd64 \
-        --build-arg THREADS=$(nproc) \
+        --build-arg THREADS=$THREADS \
         -t $REGISTRY/$IMAGE_NAME:$TAG \
         -t $REGISTRY/$IMAGE_NAME:latest \
         --push .

@@ -34,11 +34,16 @@ jobs:
           submodules: recursive
       
       # This is going to set CPU thread into the environment variable
+      # Check if THREADS is a valid integer, otherwise set to 4
       - name: Set THREADS environment variable
         id: cpu-threads
         run: |
-          echo "THREADS=$(nproc)" >> $GITHUB_ENV
-          echo "Number of CPU threads: $THREADS"
+          THREADS=$(nproc)
+          if ! [[ "$THREADS" =~ ^[0-9]+$ ]]; then
+            THREADS=4
+          fi
+          echo "THREADS=$THREADS" >> $GITHUB_ENV
+          echo "Using $THREADS CPU threads"
       
       # Add support for more platforms with QEMU (optional)
       # https://github.com/docker/setup-qemu-action
