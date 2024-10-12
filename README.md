@@ -3,7 +3,7 @@ This repository provides drivers for RPLidar, the Astra camera, and the Dabai ca
 
 
 
-## Scheduled GitHub Action CI
+## Scheduled GitHub Action CI (Deprecated)
 
 The GitHub Action has been set to run at 00:00 on the second of every month. This can help us to keep updating from the base image `ros:humble-ros-core-jammy`.
 
