@@ -19,6 +19,7 @@ build_and_publish:
     - echo "The CI registry is $CI_REGISTRY"
     - echo "The CI registry user is $CI_REGISTRY_USER"
     - echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
+    - echo "Number of CPU threads: $(nproc)"
     - docker info  # Verify Docker client can connect to Docker daemon
 
   script:
