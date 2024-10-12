@@ -35,14 +35,14 @@ RUN mkdir -p ${ROS2_WS}/src && \
     rosdep install -q -y -r --from-paths src --ignore-src
 
 ### Rplidar Installation ###
-RUN apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup -y && \
+RUN apt install -y ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup && \
     . /opt/ros/humble/setup.sh && \
     colcon build --packages-select rplidar_ros --symlink-install --parallel-workers ${THREADS} --mixin release && \
     colcon build --packages-select csm --symlink-install --parallel-workers ${THREADS} --mixin release && \
     colcon build --packages-select ros2_laser_scan_matcher --symlink-install --parallel-workers ${THREADS} --mixin release && \
-    colcon build --packages-select slam_toolbox --symlink-install --parallel-workers ${THREADS} --mixin release && \
-
-    apt install ros-humble-rplidar-ros
+    # colcon build --packages-select slam_toolbox --symlink-install --parallel-workers ${THREADS} --mixin release && \
+    apt install -y ros-${ROS_DISTRO}-slam-toolbox
+    apt install -y ros-humble-rplidar-ros
 
 ### Astra Camera Installation ###
 # install dependencies
