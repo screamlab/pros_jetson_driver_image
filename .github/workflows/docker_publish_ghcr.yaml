@@ -33,6 +33,13 @@ jobs:
         with:
           submodules: recursive
       
+      # This is going to set CPU thread into the environment variable
+      - name: Set THREADS environment variable
+        id: cpu-threads
+        run: |
+          echo "THREADS=$(nproc)" >> $GITHUB_ENV
+          echo "Number of CPU threads: $THREADS"
+      
       # Add support for more platforms with QEMU (optional)
       # https://github.com/docker/setup-qemu-action
       - name: Set up QEMU
@@ -95,6 +102,8 @@ jobs:
           file: ./Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }} , ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          build-args: |
+            THREADS=${{ env.THREADS }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           # TODO: Improve pipeline with https://docs.docker.com/build/ci/github-actions/multi-platform/
