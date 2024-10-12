@@ -1,4 +1,4 @@
-FROM ghcr.io/screamlab/pros_base_image:latest
+FROM registry.screamtrumpet.csie.ncku.edu.tw/screamlab/pros_base_image:latest
 ENV ROS2_WS /workspaces
 ENV ROS_DOMAIN_ID=1
 ENV ROS_DISTRO=humble
