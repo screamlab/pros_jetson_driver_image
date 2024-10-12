@@ -40,6 +40,7 @@ build_and_publish:
     - echo "Building and pushing Docker image $REGISTRY/$IMAGE_NAME with tag $TAG"
     - |
       docker buildx build --provenance=false --platform linux/arm64,linux/amd64 \
+        --build-arg THREADS=$(nproc) \
         -t $REGISTRY/$IMAGE_NAME:$TAG \
         -t $REGISTRY/$IMAGE_NAME:latest \
         --push .
