@@ -4,6 +4,7 @@ stages:
 variables:
   REGISTRY: $CI_REGISTRY  # GitLab provides this variable for the registry URL
   IMAGE_NAME: $CI_PROJECT_PATH  # GitLab equivalent to GitHub's repository variable
+  GIT_SUBMODULE_STRATEGY: recursive
 
 
 build_and_publish:
