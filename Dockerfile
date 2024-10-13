@@ -40,8 +40,8 @@ RUN apt install -y ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup 
     colcon build --packages-select rplidar_ros --symlink-install --parallel-workers ${THREADS} --mixin release && \
     colcon build --packages-select csm --symlink-install --parallel-workers ${THREADS} --mixin release && \
     colcon build --packages-select ros2_laser_scan_matcher --symlink-install --parallel-workers ${THREADS} --mixin release && \
-    # colcon build --packages-select slam_toolbox --symlink-install --parallel-workers ${THREADS} --mixin release && \
-    apt install -y ros-${ROS_DISTRO}-slam-toolbox && \
+    colcon build --packages-select slam_toolbox --symlink-install --parallel-workers ${THREADS} --mixin release && \
+    # apt install -y ros-${ROS_DISTRO}-slam-toolbox && \
     apt install -y ros-humble-rplidar-ros
 
 ### Astra Camera Installation ###
