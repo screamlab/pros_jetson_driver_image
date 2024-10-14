@@ -46,6 +46,24 @@ We have written the command `source /workspaces/rebuild_colcon.rc` as an alias <
 
 
 
+## Reference
+
+The reference of `src/csm` is probably https://github.com/clearpathrobotics/csm/tree/catkinize_csm_eigen. However, there are several differences shown below and thus we don't use submodule here.
+
+```
+❯ diff -rq csm pros_jetson_driver_image/src/csm
+
+Files csm/CMakeLists.txt and pros_jetson_driver_image/src/csm/CMakeLists.txt differ
+Only in csm: .git
+Files csm/.gitignore and pros_jetson_driver_image/src/csm/.gitignore differ
+Files csm/package.xml and pros_jetson_driver_image/src/csm/package.xml differ
+Files csm/README.md and pros_jetson_driver_image/src/csm/README.md differ
+Only in pros_jetson_driver_image/src/csm: resource
+Files csm/src/csm/orientation.cpp and pros_jetson_driver_image/src/csm/src/csm/orientation.cpp differ
+```
+
+
+
 ## Manually build the image
 
 ### Environments Setup
