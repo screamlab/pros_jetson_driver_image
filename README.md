@@ -123,3 +123,47 @@ docker run --privileged --rm tonistiigi/binfmt --install all)
 
 Reference: https://askubuntu.com/questions/1339558/cant-build-dockerfile-for-arm64-due-to-libc-bin-segmentation-fault
 
+
+
+## Log
+
+- `ros2_laser_scan_matcher`
+
+  ```
+  #17 116.6 --- stderr: ros2_laser_scan_matcher
+  #17 116.6 In file included from /workspaces/src/ros2_laser_scan_matcher/include/ros2_laser_scan_matcher/laser_scan_matcher.h:47,
+  #17 116.6                  from /workspaces/src/ros2_laser_scan_matcher/src/laser_scan_matcher.cpp:38:
+  #17 116.6 /opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.h:35:2: warning: #warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead [-Wcpp]
+  #17 116.6    35 | #warning This header is obsolete, please include tf2_geometry_msgs/tf2_geometry_msgs.hpp instead
+  #17 116.6       |  ^~~~~~~
+  #17 116.6 ---
+  #17 116.6 Finished <<< ros2_laser_scan_matcher [22.3s]
+  #17 116.8 
+  #17 116.8 Summary: 1 package finished [22.6s]
+  #17 116.8   1 package had stderr output: ros2_laser_scan_matcher
+  ```
+
+  
+
+- `slam_toolbox`
+
+  We need to build slam toolbox because the default version for ROS2 humble isn't up-to-date.
+
+  ```
+  #17 117.4 [0.437s] WARNING:colcon.colcon_core.package_selection:Some selected packages are already built in one or more underlay workspaces:
+  #17 117.4 	'slam_toolbox' is in: /opt/ros/humble
+  #17 117.4 If a package in a merged underlay workspace is overridden and it installs headers, then all packages in the overlay must sort their include directories by workspace order. Failure to do so may result in build failures or undefined behavior at run time.
+  #17 117.4 If the overridden package is used by another package in any underlay, then the overriding package in the overlay must be API and ABI compatible or undefined behavior at run time may occur.
+  #17 117.4 
+  #17 117.4 If you understand the risks and want to override a package anyways, add the following to the command line:
+  #17 117.4 	--allow-overriding slam_toolbox
+  #17 117.4 
+  #17 117.4 This may be promoted to an error in a future release of colcon-override-check.
+  ```
+
+
+
+- `rplidar_ros`
+
+  See `logs/rplidar_ros.log` in this repository.
+

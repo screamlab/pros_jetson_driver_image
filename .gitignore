@@ -1,5 +1,6 @@
 devel/
-logs/
+logs/*
+!logs/rplidar_ros.log
 build/
 bin/
 lib/
