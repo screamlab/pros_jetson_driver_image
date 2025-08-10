@@ -18,7 +18,7 @@ RUN apt update && \
     apt upgrade -y && \
     apt autoremove -y && \
     apt autoclean -y && \
-
+    ulimit -s 65536 && \
     pip3 install --no-cache-dir --upgrade pip
 
 ##### colcon Installation #####
