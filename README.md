@@ -46,6 +46,46 @@ We have written the command `source /workspaces/rebuild_colcon.rc` as an alias <
 
 
 
+## Manually Push Multi-Architecture Docker Manifest
+
+We provide `push.sh` and `manifest.sh` in `script` directory to do so.
+
+
+
+### `push.sh`
+
+1. Make sure your target docker image is named to the same as your target manifest location.
+
+2. Suppose  your target manifest is `ghcr.io/screamlab/pros_jetson_driver_image:latest`. Make sure you've tagged your Docker image with this name.
+
+3. Login to the target container registry.
+
+4. Provide the container registry, image name, and tag as parameters to the script, like so:
+
+   ```bash 
+   ./scripts/push.sh -c ghcr.io/screamlab -n pros_jetson_driver_image -t 0.1.2
+   ```
+
+   This script automatically detects your system architecture and push the re-tagged image to `ghcr.io/screamlab/pros_jetson_driver_image:${ARCH}-${TAG}`.
+
+5. Do the step above in another system architecture.
+
+
+
+### `manifest.sh`
+
+1. Make sure all your images with different architecture are all pushed to the container registry.
+
+2. Run the following command:
+
+   ```bash
+   ./scripts/manifest.sh -c ghcr.io/screamlab -n pros_jetson_driver_image -t 0.1.2
+   ```
+
+   This script tries to delete the duplicated manifest name in local host and then push the manifest to the container registry.
+
+
+
 ## Reference
 
 The reference of `src/csm` is probably https://github.com/clearpathrobotics/csm/tree/catkinize_csm_eigen. However, there are several differences shown below and thus we don't use submodule here.

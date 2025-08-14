@@ -35,7 +35,8 @@ RUN mkdir -p ${ROS2_WS}/src && \
     rosdep install -q -y -r --from-paths src --ignore-src
 
 ### Rplidar Installation ###
-RUN apt install -y ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup && \
+RUN apt install -y ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup \
+        build-essential pkg-config libssl-dev && \
     . /opt/ros/humble/setup.sh && \
     colcon build --packages-select rplidar_ros --symlink-install --parallel-workers ${THREADS} --mixin release && \
     colcon build --packages-select csm --symlink-install --parallel-workers ${THREADS} --mixin release && \
